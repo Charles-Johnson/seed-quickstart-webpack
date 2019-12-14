@@ -55,7 +55,6 @@ pub struct Model {
 #[derive(Clone, Copy, Eq, PartialEq)]
 pub enum Page {
     Home,
-    About,
     NotFound,
 }
 
@@ -63,7 +62,6 @@ impl Page {
     pub fn to_href(self) -> &'static str {
         match self {
             Self::Home => "/",
-            Self::About => "/about",
             Self::NotFound => "/404",
         }
     }
@@ -73,7 +71,6 @@ impl From<Url> for Page {
     fn from(url: Url) -> Self {
         match url.path.first().map(String::as_str) {
             None | Some("") => Self::Home,
-            Some("about") => Self::About,
             _ => Self::NotFound,
         }
     }
@@ -142,7 +139,6 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::UpdatePageTitle => {
             let title = match model.page {
                 Page::Home => TITLE_SUFFIX.to_owned(),
-                Page::About => format!("About - {}", TITLE_SUFFIX),
                 Page::NotFound => format!("404 - {}", TITLE_SUFFIX),
             };
             document().set_title(&title);
@@ -183,7 +179,6 @@ pub fn view(model: &Model) -> impl View<Msg> {
         ],
         match model.page {
             Page::Home => page::home::view().els(),
-            Page::About => page::about::view().els(),
             Page::NotFound => page::not_found::view().els(),
         },
         page::partial::header::view(model).els(),

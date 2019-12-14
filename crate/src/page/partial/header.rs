@@ -73,41 +73,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                         C.sm__h_full,
                         C.sm__bg_gray_2,
                         C.sm__w_24,
-                        C.sm__bg_yellow_6 => model.page == Page::About,
                     ],]
-                ],
-            ]
-        } else {
-            empty![]
-        },
-        // Photo 1
-        if model.page == Page::About {
-            div![
-                class![
-                    C.absolute,
-                    C.top_0,
-                    C.inset_x_0,
-                    C.mt_6,
-                    C.flex,
-                    C.justify_center
-                    // sm__
-                    C.sm__mt_10,
-                    // md__
-                    C.md__mt_8,
-                ],
-                img![
-                    class![
-                        C.w_xs,
-                        C.h_full,
-                        C.object_contain,
-                        // sm__
-                        C.sm__w_100,
-                        // lg
-                        C.lg__w_570px,
-                    ],
-                    attrs! {
-                        At::Src => image_src("photo_1.png")
-                    }
                 ],
             ]
         } else {
@@ -180,32 +146,11 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 C.h_full,
                                 C.border_l_4,
                                 C.border_r_4,
-                                if model.page == Page::About {
-                                    C.border_yellow_6
-                                } else {
-                                    C.border_gray_2
-                                },
+                                C.border_gray_2,
                                 C.w_full,
                                 // sm__
                                 C.sm__hidden,
                             ],
-                            a![
-                                class![
-                                    C.pl_8,
-                                    C.h_full,
-                                    C.flex,
-                                    C.items_center,
-                                    C.hover__text_yellow_7,
-                                    C.outline_none,
-                                    C.py_6,
-                                ],
-                                attrs! {
-                                    At::Href => Page::About.to_href()
-                                },
-                                simple_ev(Ev::Click, Msg::ScrollToTop),
-                                simple_ev(Ev::Click, Msg::HideMenu),
-                                "About"
-                            ]
                         ],
                         li![
                             class![C.block, C.h_full, C.w_full,],
@@ -353,22 +298,6 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 C.sm__ml_8
                                 C.sm__h_full,
                             ],
-                            a![
-                                class![
-                                    // sm__
-                                    C.sm__h_full,
-                                    C.sm__flex,
-                                    C.sm__items_center,
-                                    C.sm__hover__text_yellow_7,
-                                    C.sm__outline_none,
-                                ],
-                                attrs! {
-                                    At::Href => Page::About.to_href()
-                                },
-                                simple_ev(Ev::Click, Msg::ScrollToTop),
-                                simple_ev(Ev::Click, Msg::HideMenu),
-                                "About"
-                            ]
                         ],
                         li![
                             class![
@@ -505,7 +434,6 @@ pub fn view(model: &Model) -> impl View<Msg> {
                         C.sm__h_full,
                         C.sm__bg_gray_2,
                         C.sm__w_24,
-                        C.sm__bg_yellow_6 => model.page == Page::About,
                     ],]
                 ],
             ]

@@ -1,5 +1,5 @@
 use crate::{
-    generated::css_classes::C, image_src, Msg, Page, MAIL_TO_HELLWEB,
+    generated::css_classes::C, image_src, Msg, MAIL_TO_HELLWEB,
     MAIL_TO_KAVIK,
 };
 use seed::{prelude::*, *};
@@ -1545,53 +1545,6 @@ pub fn view() -> impl View<Msg> {
                             }
                         ]
                     ],
-                    // About your new developer
-                    a![
-                        attrs!{
-                            At::Href => Page::About.to_href()
-                        },
-                        class![
-                            C.block,
-                            C.mt_20,
-                            C.mb_16,
-                            C.ml_5,
-                            C.flex,
-                            C.items_center,
-                            C.justify_center,
-                            C.text_19,
-                            C.text_gray_10,
-                            C.hover__text_yellow_7,
-                            // sm__
-                            C.sm__mt_40,
-                            C.sm__mb_24,
-                            C.sm__text_28,
-                            // lg__
-                            C.lg__mt_64,
-                            C.lg__mb_48,
-                            C.lg__text_50,
-                        ],
-                        simple_ev(Ev::Click, Msg::ScrollToTop),
-                        span![
-                            class![
-                                C.font_semibold
-                            ],
-                            "About"
-                        ],
-                        "\u{00A0}your new developer",
-                        img![
-                            class![
-                                C.mt_1,
-                                C.h_12,
-                                // sm__
-                                C.sm__h_16,
-                                // lg__
-                                C.lg__h_32,
-                            ],
-                            attrs!{
-                                At::Src => image_src("next.svg")
-                            }
-                        ],
-                    ]
                 ]
             ]
         ],
