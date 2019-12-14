@@ -1,4 +1,4 @@
-use crate::{generated::css_classes::C, image_src, Msg, MAIL_TO_KAVIK};
+use crate::{generated::css_classes::C, image_src, Msg, MAIL_TO_CHARLES, CHARLES_EMAIL};
 use seed::{prelude::*, *};
 
 pub fn view() -> impl View<Msg> {
@@ -22,40 +22,9 @@ pub fn view() -> impl View<Msg> {
                 // sm__
                 C.sm__w_132
             ],
-            div![
-                class![
-                    // lg__
-                    C.lg__pb_3,
-                ],
-                img![
-                    class![
-                        C.inline,
-                        C.w_6,
-                        C.align_baseline,
-                        // sm__
-                        C.sm__w_12
-                    ],
-                    attrs! {
-                        At::Src => image_src("logo.svg")
-                    }
-                ],
-                span![
-                    class![
-                        C.ml_1,
-                        C.font_display,
-                        C.font_semibold,
-                        C.text_15,
-                        C.text_yellow_6,
-                        // sm__
-                        C.sm__mt_2,
-                        C.sm__text_25,
-                    ],
-                    "2019"
-                ]
-            ],
             a![
                 attrs! {
-                    At::Href => MAIL_TO_KAVIK,
+                    At::Href => MAIL_TO_CHARLES,
                 },
                 class![
                     C.font_display,
@@ -67,7 +36,7 @@ pub fn view() -> impl View<Msg> {
                     // sm__
                     C.sm__text_26
                 ],
-                "martin@kavik.cz"
+                CHARLES_EMAIL
             ],
             div![
                 class![C.cursor_pointer, C.h_full, C.flex, C.items_center,],

@@ -15,9 +15,9 @@ use Visibility::*;
 
 const TITLE_SUFFIX: &str = "Kavik.cz";
 // https://mailtolink.me/
-const MAIL_TO_KAVIK: &str = "mailto:martin@kavik.cz?subject=Something%20for%20Martin&body=Hi!%0A%0AI%20am%20Groot.%20I%20like%20trains.";
-const MAIL_TO_HELLWEB: &str =
-    "mailto:martin@hellweb.app?subject=Hellweb%20-%20pain&body=Hi!%0A%0AI%20hate";
+const MAIL_TO_CHARLES: &str = "mailto:charlesthomasjohnson0@gmail.com?subject=Something%20for%20Martin&body=Hi!%0A%0AI%20am%20Groot.%20I%20like%20trains.";
+const CHARLES_EMAIL: &str = "charlesthomasonjohnson0@gmail.com";
+
 const USER_AGENT_FOR_PRERENDERING: &str = "ReactSnap";
 const STATIC_PATH: &str = "static";
 const IMAGES_PATH: &str = "static/images";
