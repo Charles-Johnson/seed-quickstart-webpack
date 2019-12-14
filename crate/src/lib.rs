@@ -13,6 +13,8 @@ use generated::css_classes::C;
 use seed::{events::Listener, prelude::*, *};
 use Visibility::*;
 
+use page::home; 
+
 const TITLE_SUFFIX: &str = "Kavik.cz";
 // https://mailtolink.me/
 const MAIL_TO_CHARLES: &str = "mailto:charlesthomasjohnson0@gmail.com?subject=Something%20for%20Martin&body=Hi!%0A%0AI%20am%20Groot.%20I%20like%20trains.";
@@ -47,6 +49,7 @@ type ScrollHistory = FixedVecDeque<[i32; 3]>;
 
 pub struct Model {
     pub page: Page,
+    pub home_page_model: home::Model,
     pub scroll_history: ScrollHistory,
     pub menu_visibility: Visibility,
     pub in_prerendering: bool,
@@ -85,6 +88,7 @@ pub fn init(url: Url, orders: &mut impl Orders<Msg>) -> Init<Model> {
 
     let model = Model {
         page: url.into(),
+        home_page_model: home::Model::default(),
         scroll_history: ScrollHistory::new(),
         menu_visibility: Hidden,
         in_prerendering: is_in_prerendering(),
@@ -128,6 +132,7 @@ pub enum Msg {
     Scrolled(i32),
     ToggleMenu,
     HideMenu,
+    HomeMsg(home::HomeMsg),
 }
 
 pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
@@ -153,6 +158,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::HideMenu => {
             model.menu_visibility = Hidden;
         },
+        Msg::HomeMsg(hm) => home::update(hm, &mut model.home_page_model),
     }
 }
 
@@ -178,7 +184,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
             C.flex_col,
         ],
         match model.page {
-            Page::Home => page::home::view().els(),
+            Page::Home => page::home::view(&model.home_page_model).els(),
             Page::NotFound => page::not_found::view().els(),
         },
         page::partial::header::view(model).els(),
