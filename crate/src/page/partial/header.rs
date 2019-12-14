@@ -137,42 +137,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 },
                                 simple_ev(Ev::Click, Msg::ScrollToTop),
                                 simple_ev(Ev::Click, Msg::HideMenu),
-                                "Home & Projects"
-                            ]
-                        ],
-                        li![
-                            class![
-                                C.block,
-                                C.h_full,
-                                C.border_l_4,
-                                C.border_r_4,
-                                C.border_gray_2,
-                                C.w_full,
-                                // sm__
-                                C.sm__hidden,
-                            ],
-                        ],
-                        li![
-                            class![C.block, C.h_full, C.w_full,],
-                            a![
-                                class![
-                                    C.pl_8,
-                                    C.h_full,
-                                    C.flex,
-                                    C.items_center,
-                                    C.hover__text_yellow_7,
-                                    C.py_6,
-                                    // sm__
-                                    C.sm__py_8,
-                                    C.sm__pl_0,
-                                    C.sm__justify_center,
-                                ],
-                                attrs! {
-                                    At::Href => asset_path("Martin_Kavik_resume.pdf")
-                                },
-                                simple_ev(Ev::Click, Msg::HideMenu),
-                                "Resume",
-                                span![class![C.text_gray_5,], ".pdf"]
+                                "Home"
                             ]
                         ],
                         li![
@@ -191,7 +156,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.sm__justify_center,
                                 ],
                                 attrs! {
-                                    At::Href => "https://github.com/MartinKavik"
+                                    At::Href => "https://github.com/Charles-Johnson/zia_programming"
                                 },
                                 simple_ev(Ev::Click, Msg::HideMenu),
                                 "GitHub",
@@ -243,16 +208,14 @@ pub fn view(model: &Model) -> impl View<Msg> {
                         },
                         simple_ev(Ev::Click, Msg::ScrollToTop),
                         simple_ev(Ev::Click, Msg::HideMenu),
-                        img![
+                        h1![
                             class![
                                 C.h_6,
                                 // sm__
                                 C.sm__h_10,
                                 C.sm__w_70px,
                             ],
-                            attrs! {
-                                At::Src => image_src("logo.svg")
-                            }
+                            "Zia"
                         ],
                     ],
                     // Links
@@ -288,44 +251,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 },
                                 simple_ev(Ev::Click, Msg::ScrollToTop),
                                 simple_ev(Ev::Click, Msg::HideMenu),
-                                "Home & Projects"
-                            ]
-                        ],
-                        li![
-                            class![
-                                // sm__
-                                C.sm__block,
-                                C.sm__ml_8
-                                C.sm__h_full,
-                            ],
-                        ],
-                        li![
-                            class![
-                                C.hidden,
-                                // md__
-                                C.md__block,
-                                C.md__ml_12,
-                                C.md__h_full,
-                            ],
-                            a![
-                                class![
-                                    // md__
-                                    C.md__h_full,
-                                    C.md__flex,
-                                    C.md__items_center,
-                                    C.md__hover__text_yellow_7,
-                                ],
-                                attrs! {
-                                    At::Href => asset_path("Martin_Kavik_resume.pdf")
-                                },
-                                "Resume",
-                                span![
-                                    class![
-                                        // md__
-                                        C.md__text_gray_5,
-                                    ],
-                                    ".pdf"
-                                ]
+                                "Home"
                             ]
                         ],
                         li![
@@ -345,7 +271,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.md__hover__text_yellow_7,
                                 ],
                                 attrs! {
-                                    At::Href => "https://github.com/MartinKavik"
+                                    At::Href => "https://github.com/Charles-Johnson/zia_programming"
                                 },
                                 "GitHub",
                                 img![
