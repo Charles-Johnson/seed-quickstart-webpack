@@ -40,40 +40,6 @@ pub fn view(model: &Model) -> impl View<Msg> {
                 ],
                 // Header background
                 div![class![C.absolute, C.inset_0, C.bg_gray_1, C.opacity_90]],
-                // Bottom header line
-                div![
-                    class![
-                        C.absolute,
-                        C.bottom_0,
-                        C.ml_12,
-                        C.w_3of5,
-                        C.h_px,
-                        // sm__
-                        C.sm__ml_0,
-                        C.sm__w_full,
-                        C.sm__h_3px
-                        C.sm__flex,
-                        C.sm__justify_center,
-                        // md__
-                        C.md___ml_30,
-                    ],
-                    div![class![
-                        C.h_full,
-                        C.bg_gray_2,
-                        // sm__
-                        C.sm__ml_6,
-                        C.sm__w_48,
-                        C.sm__bg_yellow_6 => model.page == Page::Home,
-                    ],],
-                    div![class![
-                        C.hidden,
-                        // sm__
-                        C.sm__block,
-                        C.sm__h_full,
-                        C.sm__bg_gray_2,
-                        C.sm__w_24,
-                    ],]
-                ],
             ]
         } else {
             empty![]
@@ -228,6 +194,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                             C.sm__text_gray_10,
                             C.sm__flex,
                             C.sm__items_center,
+                            C.justify_between,
                             C.sm__h_full,
                         ],
                         li![
@@ -326,40 +293,6 @@ pub fn view(model: &Model) -> impl View<Msg> {
                         // md__
                         C.md__block,
                     ],],
-                ],
-                // Bottom header line
-                div![
-                    class![
-                        C.absolute,
-                        C.top_0,
-                        C.ml_12,
-                        C.w_3of5,
-                        C.h_px,
-                        // sm__
-                        C.sm__ml_0,
-                        C.sm__w_full,
-                        C.sm__h_3px
-                        C.sm__flex,
-                        C.sm__justify_center,
-                        // md__
-                        C.md___ml_30,
-                    ],
-                    div![class![
-                        C.h_full,
-                        C.bg_gray_2,
-                        // sm__
-                        C.sm__ml_6,
-                        C.sm__w_48,
-                        C.sm__bg_yellow_6 => model.page == Page::Home,
-                    ],],
-                    div![class![
-                        C.hidden,
-                        // sm__
-                        C.sm__block,
-                        C.sm__h_full,
-                        C.sm__bg_gray_2,
-                        C.sm__w_24,
-                    ],]
                 ],
             ]
         } else {
