@@ -15,7 +15,7 @@ use Visibility::*;
 
 use page::home; 
 
-const TITLE_SUFFIX: &str = "Kavik.cz";
+const TITLE_SUFFIX: &str = "Zia";
 // https://mailtolink.me/
 const MAIL_TO_CHARLES: &str = "mailto:charlesthomasjohnson0@gmail.com?subject=Something%20for%20Martin&body=Hi!%0A%0AI%20am%20Groot.%20I%20like%20trains.";
 const CHARLES_EMAIL: &str = "charlesthomasonjohnson0@gmail.com";
