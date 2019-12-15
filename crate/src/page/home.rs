@@ -44,7 +44,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
             C.flex,
             C.flex_col,
             C.justify_center,
-            C.h_600px,
+            C.flex_1,
         ],
         vec![
             input![
