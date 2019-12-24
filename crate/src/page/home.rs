@@ -48,6 +48,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
         ],
         vec![
             input![
+                class![C.border_primary, C.border_2],
                 attrs!{At::Type => "text", At::Name => "input", At::Value => model.input},
                 input_ev(Ev::Input, |s| Msg::HomeMsg(HomeMsg::Input(s))),
                 keyboard_ev("keydown", |ev| if ev.key_code() == 13 {Msg::HomeMsg(HomeMsg::Submit)} else {Msg::HomeMsg(HomeMsg::Nothing)}),

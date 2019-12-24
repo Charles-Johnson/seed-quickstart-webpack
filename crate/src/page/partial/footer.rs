@@ -1,4 +1,4 @@
-use crate::{generated::css_classes::C, image_src, Msg, MAIL_TO_CHARLES, CHARLES_EMAIL};
+use crate::{generated::css_classes::C, image_src, Msg, MAIL_TO_CHARLES, CHARLES_EMAIL, TWEET_TO_CHARLES};
 use seed::{prelude::*, *};
 
 pub fn view() -> impl View<Msg> {
@@ -8,7 +8,6 @@ pub fn view() -> impl View<Msg> {
             C.shadow_2xl_above,
             C.flex,
             C.justify_center,
-            // sm__
             C.sm__h_24,
         ],
         div![
@@ -19,10 +18,9 @@ pub fn view() -> impl View<Msg> {
                 C.flex,
                 C.justify_between,
                 C.items_center,
-                // sm__
                 C.sm__w_132
             ],
-            a![
+            h3![
                 attrs! {
                     At::Href => MAIL_TO_CHARLES,
                 },
@@ -30,10 +28,7 @@ pub fn view() -> impl View<Msg> {
                     C.font_display,
                     C.font_semibold,
                     C.text_16,
-                    C.text_gray_10,
-                    C.underline,
-                    C.underline_yellow_7,
-                    // sm__
+                    C.text_primary,
                     C.sm__text_26
                 ],
                 CHARLES_EMAIL
@@ -41,16 +36,26 @@ pub fn view() -> impl View<Msg> {
             div![
                 class![C.cursor_pointer, C.h_full, C.flex, C.items_center,],
                 simple_ev(Ev::Click, Msg::ScrollToTop),
-                img![
-                    class![
-                        C.mt_1, C.w_12, // sm__
-                        C.sm__w_16
-                    ],
-                    attrs! {
-                        At::Src => image_src("top.svg")
-                    }
-                ],
+                image_link("메일.svg", MAIL_TO_CHARLES),
+                image_link("트위터.svg", TWEET_TO_CHARLES)
             ]
         ]
+    ]
+}
+
+fn image_link(image: &str, href: &str) -> Node<Msg> {
+    a![
+        attrs! {
+            At::Href => href,
+        },
+        img![
+            class![
+                C.mt_1, C.w_12, // sm__
+                C.sm__w_16
+            ],
+            attrs! {
+                At::Src => image_src(image)
+            }
+        ],
     ]
 }

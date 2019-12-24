@@ -39,7 +39,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                     C.sm__h_24,
                 ],
                 // Header background
-                div![class![C.absolute, C.inset_0, C.bg_gray_1, C.opacity_90]],
+                div![class![C.absolute, C.inset_0, C.opacity_90]],
             ]
         } else {
             empty![]
@@ -50,7 +50,6 @@ pub fn view(model: &Model) -> impl View<Msg> {
                 class![
                     C.fixed,
                     C.w_screen,
-                    C.bg_gray_1,
                     C.opacity_90,
                     C.h_screen,
                     // md__
@@ -63,7 +62,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                             C.mt_20,
                             C.w_full,
                             C.font_semibold,
-                            C.text_gray_10,
+                            C.text_primary,
                             C.flex,
                             C.flex_col,
                             C.mb_12,
@@ -79,9 +78,9 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 C.border_l_4,
                                 C.border_r_4,
                                 if model.page == Page::Home {
-                                    C.border_yellow_6
+                                    C.border_primary
                                 } else {
-                                    C.border_gray_2
+                                    C.border_primary
                                 },
                                 C.w_full,
                                 // sm__
@@ -93,7 +92,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.h_full,
                                     C.flex,
                                     C.items_center,
-                                    C.hover__text_yellow_7,
+                                    C.hover__text_primary,
                                     C.outline_none,
                                     C.py_6,
                                 ],
@@ -113,7 +112,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.h_full,
                                     C.flex,
                                     C.items_center,
-                                    C.hover__text_yellow_7,
+                                    C.hover__text_primary,
                                     C.py_6,
                                     // sm__
                                     C.sm__py_8,
@@ -136,7 +135,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                         C.sm__w_4,
                                     ],
                                     attrs! {
-                                        At::Src => image_src("link_arrow.svg")
+                                        At::Src => image_src("기트헙.svg")
                                     }
                                 ]
                             ]
@@ -173,14 +172,15 @@ pub fn view(model: &Model) -> impl View<Msg> {
                         },
                         simple_ev(Ev::Click, Msg::ScrollToTop),
                         simple_ev(Ev::Click, Msg::HideMenu),
-                        h1![
+                        img![
                             class![
                                 C.h_6,
-                                // sm__
                                 C.sm__h_10,
                                 C.sm__w_70px,
                             ],
-                            "Zia"
+                            attrs!{
+                                At::Src => image_src("zia.svg"),
+                            }
                         ],
                     ],
                     // Links
@@ -191,7 +191,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                             C.sm___mt_px,
                             C.sm__text_21,
                             C.sm__font_semibold,
-                            C.sm__text_gray_10,
+                            C.sm__text_primary,
                             C.sm__flex,
                             C.sm__items_center,
                             C.justify_between,
@@ -209,7 +209,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.sm__h_full,
                                     C.sm__flex,
                                     C.sm__items_center,
-                                    C.sm__hover__text_yellow_7,
+                                    C.sm__hover__text_primary,
                                     C.sm__outline_none,
                                 ],
                                 attrs! {
@@ -234,7 +234,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.md__h_full,
                                     C.md__flex,
                                     C.md__items_center,
-                                    C.md__hover__text_yellow_7,
+                                    C.md__hover__text_primary,
                                 ],
                                 attrs! {
                                     At::Href => "https://github.com/Charles-Johnson/zia_programming"
@@ -249,7 +249,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                         C.md__w_4,
                                     ],
                                     attrs! {
-                                        At::Src => image_src("link_arrow.svg")
+                                        At::Src => image_src("기트헙.svg")
                                     }
                                 ]
                             ]
@@ -268,7 +268,6 @@ pub fn view(model: &Model) -> impl View<Msg> {
                             class![
                                 C.h_8,
                                 C.w_12,
-                                // sm__
                                 C.sm__h_10
                                 C.sm__w_16,
                             ],

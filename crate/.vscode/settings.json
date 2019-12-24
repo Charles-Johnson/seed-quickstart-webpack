@@ -5,5 +5,8 @@
         "**/node_modules/*/**": true,
         "dist/**": true,
         "crate/src/generated/css_classes.rs": true,
+    },
+    "files.exclude": {
+        "target/": true
     }
 }
