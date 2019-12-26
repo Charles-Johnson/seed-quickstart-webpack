@@ -173,12 +173,8 @@ pub fn view(model: &Model) -> impl View<Msg> {
                         simple_ev(Ev::Click, Msg::ScrollToTop),
                         simple_ev(Ev::Click, Msg::HideMenu),
                         img![
-                            class![
-                                C.h_6,
-                                C.sm__h_10,
-                                C.sm__w_70px,
-                            ],
-                            attrs!{
+                            class![C.h_6, C.sm__h_10, C.sm__w_70px,],
+                            attrs! {
                                 At::Src => image_src("zia.svg"),
                             }
                         ],

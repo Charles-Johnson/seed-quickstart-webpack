@@ -13,7 +13,7 @@ use generated::css_classes::C;
 use seed::{events::Listener, prelude::*, *};
 use Visibility::*;
 
-use page::home; 
+use page::home;
 
 const TITLE_SUFFIX: &str = "Zia";
 // https://mailtolink.me/

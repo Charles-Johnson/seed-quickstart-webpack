@@ -1,6 +1,4 @@
-use crate::{
-    generated::css_classes::C, Msg
-};
+use crate::{generated::css_classes::C, Msg};
 use seed::{prelude::*, *};
 use zia::Context;
 
@@ -34,28 +32,25 @@ pub fn update(msg: HomeMsg, model: &mut Model) {
             model.output = model.context.execute(&model.input);
             model.input = String::new();
         },
-        HomeMsg::Nothing => {}
+        HomeMsg::Nothing => {},
     };
 }
 
 pub fn view(model: &Model) -> impl View<Msg> {
     div![
-        class![
-            C.flex,
-            C.flex_col,
-            C.justify_center,
-            C.flex_1,
-        ],
+        class![C.flex, C.flex_col, C.justify_center, C.flex_1,],
         vec![
             input![
                 class![C.border_primary, C.border_2],
-                attrs!{At::Type => "text", At::Name => "input", At::Value => model.input},
+                attrs! {At::Type => "text", At::Name => "input", At::Value => model.input},
                 input_ev(Ev::Input, |s| Msg::HomeMsg(HomeMsg::Input(s))),
-                keyboard_ev("keydown", |ev| if ev.key_code() == 13 {Msg::HomeMsg(HomeMsg::Submit)} else {Msg::HomeMsg(HomeMsg::Nothing)}),
+                keyboard_ev("keydown", |ev| if ev.key_code() == 13 {
+                    Msg::HomeMsg(HomeMsg::Submit)
+                } else {
+                    Msg::HomeMsg(HomeMsg::Nothing)
+                }),
             ],
-            p![
-                model.output
-            ]
+            p![model.output]
         ]
     ]
 }
