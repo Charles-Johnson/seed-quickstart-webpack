@@ -43,11 +43,11 @@ pub fn view(model: &Model) -> impl View<Msg> {
             input![
                 class![C.border_primary, C.border_2],
                 attrs! {At::Type => "text", At::Name => "input", At::Value => model.input},
-                input_ev(Ev::Input, |s| Msg::HomeMsg(HomeMsg::Input(s))),
+                input_ev(Ev::Input, |s| Msg::Home(HomeMsg::Input(s))),
                 keyboard_ev("keydown", |ev| if ev.key_code() == 13 {
-                    Msg::HomeMsg(HomeMsg::Submit)
+                    Msg::Home(HomeMsg::Submit)
                 } else {
-                    Msg::HomeMsg(HomeMsg::Nothing)
+                    Msg::Home(HomeMsg::Nothing)
                 }),
             ],
             p![model.output]

@@ -133,7 +133,7 @@ pub enum Msg {
     Scrolled(i32),
     ToggleMenu,
     HideMenu,
-    HomeMsg(home::HomeMsg),
+    Home(home::HomeMsg),
 }
 
 pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
@@ -159,7 +159,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::HideMenu => {
             model.menu_visibility = Hidden;
         },
-        Msg::HomeMsg(hm) => home::update(hm, &mut model.home_page_model),
+        Msg::Home(hm) => home::update(hm, &mut model.home_page_model),
     }
 }
 
