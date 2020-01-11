@@ -77,11 +77,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 C.h_full,
                                 C.border_l_4,
                                 C.border_r_4,
-                                if model.page == Page::Home {
-                                    C.border_primary
-                                } else {
-                                    C.border_primary
-                                },
+                                C.border_primary,
                                 C.w_full,
                                 // sm__
                                 C.sm__hidden,

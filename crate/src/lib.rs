@@ -158,7 +158,7 @@ pub enum Msg {
     Scrolled(i32),
     ToggleMenu,
     HideMenu,
-    Home(home::HomeMsg),
+    Home(home::Msg),
 }
 
 pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
