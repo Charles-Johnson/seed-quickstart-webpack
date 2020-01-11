@@ -18,7 +18,7 @@ pub fn view() -> impl View<Msg> {
                 C.font_display,
                 C.font_thin,
                 C.text_29,
-                C.text_gray_10,
+                C.text_primary,
                 // sm__
                 C.sm__text_45,
                 // lg__

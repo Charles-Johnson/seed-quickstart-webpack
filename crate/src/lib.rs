@@ -10,14 +10,17 @@ mod page;
 
 use fixed_vec_deque::FixedVecDeque;
 use generated::css_classes::C;
-use seed::{events::Listener, prelude::*, *};
+use seed::{Listener, prelude::*, *};
 use Visibility::*;
 
-const TITLE_SUFFIX: &str = "Kavik.cz";
+use page::home;
+
+const TITLE_SUFFIX: &str = "Zia";
 // https://mailtolink.me/
-const MAIL_TO_KAVIK: &str = "mailto:martin@kavik.cz?subject=Something%20for%20Martin&body=Hi!%0A%0AI%20am%20Groot.%20I%20like%20trains.";
-const MAIL_TO_HELLWEB: &str =
-    "mailto:martin@hellweb.app?subject=Hellweb%20-%20pain&body=Hi!%0A%0AI%20hate";
+const MAIL_TO_CHARLES: &str = "mailto:charlesthomasjohnson0@gmail.com";
+const CHARLES_EMAIL: &str = "Contact";
+const TWEET_TO_CHARLES: &str = "https://twitter.com/Charles40189535?s=03";
+
 const USER_AGENT_FOR_PRERENDERING: &str = "ReactSnap";
 const STATIC_PATH: &str = "static";
 const IMAGES_PATH: &str = "static/images";
@@ -55,6 +58,7 @@ type ScrollHistory = FixedVecDeque<[i32; 3]>;
 
 pub struct Model {
     pub page: Page,
+    pub home_page_model: home::Model,
     pub scroll_history: ScrollHistory,
     pub menu_visibility: Visibility,
     pub in_prerendering: bool,
@@ -65,7 +69,6 @@ pub struct Model {
 #[derive(Clone, Copy, Eq, PartialEq)]
 pub enum Page {
     Home,
-    About,
     NotFound,
 }
 
@@ -73,7 +76,6 @@ impl Page {
     pub fn to_href(self) -> &'static str {
         match self {
             Self::Home => "/",
-            Self::About => "/about",
             Self::NotFound => "/404",
         }
     }
@@ -83,7 +85,6 @@ impl From<Url> for Page {
     fn from(url: Url) -> Self {
         match url.path.first().map(String::as_str) {
             None | Some("") => Self::Home,
-            Some("about") => Self::About,
             _ => Self::NotFound,
         }
     }
@@ -98,6 +99,7 @@ fn after_mount(url: Url, orders: &mut impl Orders<Msg>) -> AfterMount<Model> {
 
     let model = Model {
         page: url.into(),
+        home_page_model: home::Model::default(),
         scroll_history: ScrollHistory::new(),
         menu_visibility: Hidden,
         in_prerendering: is_in_prerendering(),
@@ -156,6 +158,7 @@ pub enum Msg {
     Scrolled(i32),
     ToggleMenu,
     HideMenu,
+    Home(home::HomeMsg),
 }
 
 pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
@@ -167,7 +170,6 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::UpdatePageTitle => {
             let title = match model.page {
                 Page::Home => TITLE_SUFFIX.to_owned(),
-                Page::About => format!("About - {}", TITLE_SUFFIX),
                 Page::NotFound => format!("404 - {}", TITLE_SUFFIX),
             };
             document().set_title(&title);
@@ -182,6 +184,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::HideMenu => {
             model.menu_visibility = Hidden;
         },
+        Msg::Home(hm) => home::update(hm, &mut model.home_page_model),
     }
 }
 
@@ -207,8 +210,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
             C.flex_col,
         ],
         match model.page {
-            Page::Home => page::home::view().els(),
-            Page::About => page::about::view().els(),
+            Page::Home => page::home::view(&model.home_page_model).els(),
             Page::NotFound => page::not_found::view().els(),
         },
         page::partial::header::view(model).els(),
@@ -218,10 +220,6 @@ pub fn view(model: &Model) -> impl View<Msg> {
 
 pub fn image_src(image: &str) -> String {
     format!("{}/{}", IMAGES_PATH, image)
-}
-
-pub fn asset_path(asset: &str) -> String {
-    format!("{}/{}", STATIC_PATH, asset)
 }
 
 // ------ ------
