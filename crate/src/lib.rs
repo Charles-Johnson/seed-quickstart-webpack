@@ -10,7 +10,7 @@ mod page;
 
 use fixed_vec_deque::FixedVecDeque;
 use generated::css_classes::C;
-use seed::{events::Listener, prelude::*, *};
+use seed::{Listener, prelude::*, *};
 use Visibility::*;
 
 use page::home;
@@ -24,6 +24,18 @@ const TWEET_TO_CHARLES: &str = "https://twitter.com/Charles40189535?s=03";
 const USER_AGENT_FOR_PRERENDERING: &str = "ReactSnap";
 const STATIC_PATH: &str = "static";
 const IMAGES_PATH: &str = "static/images";
+
+// ------ ------
+// Before Mount
+// ------ ------
+
+fn before_mount(_: Url) -> BeforeMount {
+    BeforeMount::new().mount_type(MountType::Takeover)
+}
+
+// ------ ------
+//     Model
+// ------ ------
 
 #[derive(Clone, Copy, Eq, PartialEq)]
 pub enum Visibility {
@@ -40,10 +52,6 @@ impl Visibility {
     }
 }
 
-// ------ ------
-//     Model
-// ------ ------
-
 // We need at least 3 last values to detect scroll direction,
 // because neighboring ones are sometimes equal.
 type ScrollHistory = FixedVecDeque<[i32; 3]>;
@@ -55,6 +63,8 @@ pub struct Model {
     pub menu_visibility: Visibility,
     pub in_prerendering: bool,
 }
+
+// ------ Page ------
 
 #[derive(Clone, Copy, Eq, PartialEq)]
 pub enum Page {
@@ -81,10 +91,10 @@ impl From<Url> for Page {
 }
 
 // ------ ------
-//     Init
+//  After Mount
 // ------ ------
 
-pub fn init(url: Url, orders: &mut impl Orders<Msg>) -> Init<Model> {
+fn after_mount(url: Url, orders: &mut impl Orders<Msg>) -> AfterMount<Model> {
     orders.send_msg(Msg::UpdatePageTitle);
 
     let model = Model {
@@ -95,11 +105,7 @@ pub fn init(url: Url, orders: &mut impl Orders<Msg>) -> Init<Model> {
         in_prerendering: is_in_prerendering(),
     };
 
-    Init {
-        model,
-        url_handling: UrlHandling::None,
-        mount_type: MountType::Takeover,
-    }
+    AfterMount::new(model).url_handling(UrlHandling::None)
 }
 
 fn is_in_prerendering() -> bool {
@@ -119,6 +125,25 @@ pub fn routes(url: Url) -> Option<Msg> {
         return None;
     }
     Some(Msg::RouteChanged(url))
+}
+
+// ------ ------
+// Window Events
+// ------ ------
+
+pub fn window_events(_: &Model) -> Vec<Listener<Msg>> {
+    vec![raw_ev(Ev::Scroll, |_| {
+        // Some browsers use `document.body.scrollTop`
+        // and other ones `document.documentElement.scrollTop`.
+        let mut position = body().scroll_top();
+        if position == 0 {
+            position = document()
+                .document_element()
+                .expect("cannot get document element")
+                .scroll_top()
+        }
+        Msg::Scrolled(position)
+    })]
 }
 
 // ------ ------
@@ -198,25 +223,6 @@ pub fn image_src(image: &str) -> String {
 }
 
 // ------ ------
-// Window Events
-// ------ ------
-
-pub fn window_events(_: &Model) -> Vec<Listener<Msg>> {
-    vec![raw_ev(Ev::Scroll, |_| {
-        // Some browsers use `document.body.scrollTop`
-        // and other ones `document.documentElement.scrollTop`.
-        let mut position = body().scroll_top();
-        if position == 0 {
-            position = document()
-                .document_element()
-                .expect("cannot get document element")
-                .scroll_top()
-        }
-        Msg::Scrolled(position)
-    })]
-}
-
-// ------ ------
 //     Start
 // ------ ------
 
@@ -224,7 +230,9 @@ pub fn window_events(_: &Model) -> Vec<Listener<Msg>> {
 pub fn run() {
     log!("Starting app...");
 
-    App::build(init, update, view)
+    App::builder(update, view)
+        .before_mount(before_mount)
+        .after_mount(after_mount)
         .routes(routes)
         .window_events(window_events)
         .build_and_start();

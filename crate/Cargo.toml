@@ -13,12 +13,12 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dev-dependencies]
-wasm-bindgen-test = "^0.2.50" # sync with `wasm-bindgen`
+wasm-bindgen-test = "^0.3.5"
 
 [dependencies]
 zia = {git = 'https://github.com/Charles-Johnson/zia_programming'}
-wasm-bindgen = "^0.2.50" # sync with `wasm-bindgen-test`
-seed = "0.4.2"
+wasm-bindgen = "^0.2.55" # sync with `wasm-bindgen-test`
+seed = "0.5.0"
 fixed-vec-deque = "0.1.8"
 
 [dependencies.web-sys]
