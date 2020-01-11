@@ -10,7 +10,7 @@ mod page;
 
 use fixed_vec_deque::FixedVecDeque;
 use generated::css_classes::C;
-use seed::{Listener, prelude::*, *};
+use seed::{prelude::*, Listener, *};
 use Visibility::*;
 
 use page::home;
