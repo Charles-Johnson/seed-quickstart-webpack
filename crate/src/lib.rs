@@ -73,6 +73,7 @@ pub enum Page {
 }
 
 impl Page {
+    #[must_use]
     pub fn to_href(self) -> &'static str {
         match self {
             Self::Home => "/",
@@ -82,6 +83,7 @@ impl Page {
 }
 
 impl From<Url> for Page {
+    #[must_use]
     fn from(url: Url) -> Self {
         match url.path.first().map(String::as_str) {
             None | Some("") => Self::Home,
@@ -118,7 +120,7 @@ fn is_in_prerendering() -> bool {
 // ------ ------
 //    Routes
 // ------ ------
-
+#[must_use]
 pub fn routes(url: Url) -> Option<Msg> {
     // Urls which start with `static` are files => treat them as external links.
     if url.path.starts_with(&[STATIC_PATH.into()]) {
@@ -130,7 +132,7 @@ pub fn routes(url: Url) -> Option<Msg> {
 // ------ ------
 // Window Events
 // ------ ------
-
+#[must_use]
 pub fn window_events(_: &Model) -> Vec<Listener<Msg>> {
     vec![raw_ev(Ev::Scroll, |_| {
         // Some browsers use `document.body.scrollTop`
@@ -198,7 +200,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 //
 // - "▶\u{fe0e}" - \u{fe0e} is the variation selector, it prevents ▶ to change to emoji in some browsers
 //   - https://codepoints.net/U+FE0E
-
+#[must_use]
 pub fn view(model: &Model) -> impl View<Msg> {
     // @TODO: Setup `prerendered` properly once https://github.com/David-OConnor/seed/issues/223 is resolved
     let prerendered = true;
@@ -218,6 +220,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
     ]
 }
 
+#[must_use]
 pub fn image_src(image: &str) -> String {
     format!("{}/{}", IMAGES_PATH, image)
 }
