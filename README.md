@@ -1,4 +1,4 @@
-# Seed Quickstart with Webpack
+# Fork of Seed Quickstart with Webpack
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/745c7b1d-5894-4f58-be28-e730a11e1ff4/deploy-status)](https://app.netlify.com/sites/quickstart-webpack/deploys)
 
