@@ -3,6 +3,11 @@ name: Main
 on: [push, pull_request]
 
 env:
+name: Main
+
+on: [push]
+
+env:
   RUST_BACKTRACE: 1
 
 jobs:
@@ -50,5 +55,6 @@ jobs:
           NETLIFY_ACCESS_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
         run: sudo netlify deploy -s $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN -p --dir ./dist
 
+         
 
 
