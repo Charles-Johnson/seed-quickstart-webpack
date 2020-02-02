@@ -16,7 +16,7 @@ crate-type = ["cdylib"]
 wasm-bindgen-test = "^0.3.5"
 
 [dependencies]
-zia = {git = 'https://github.com/Charles-Johnson/zia_programming'}
+zia = "0.5.0"
 wasm-bindgen = "^0.2.55" # sync with `wasm-bindgen-test`
 seed = "0.5.0"
 fixed-vec-deque = "0.1.8"
